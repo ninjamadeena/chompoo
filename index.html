@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>แนวข้อสอบภาษาอังกฤษ - Chompoo</title>
+  <meta property="og:title" content="แนวข้อสอบภาษาอังกฤษ" />
+  <meta property="og:description" content="เว็บไซต์แนวข้อสอบ" />
+  <meta property="og:image" content="https://chompoo.ninjakong.xyz/picture.png" />
+  <meta property="og:url" content="https://chompoo.ninjakong.xyz/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600;700&family=Kanit:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #ff6eb4;
+      --pink-light: #ffb3d9;
+      --purple: #c77dff;
+      --yellow: #ffe066;
+      --mint: #80ffdb;
+      --blue: #48cae4;
+      --coral: #ff8fa3;
+      --bg: #fff5fb;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Mitr', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ========== FLOATING STARS ========== */
+    .stars-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      font-size: 1.2rem;
+      animation: floatStar linear infinite;
+      opacity: 0.6;
+    }
+    @keyframes floatStar {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* ========== PAGE SYSTEM ========== */
+    .page {
+      display: none;
+      min-height: 100vh;
+      position: relative;
+      z-index: 1;
+    }
+    .page.active { display: flex; }
+
+    /* ========== WELCOME PAGE ========== */
+    #welcome-page {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #fff0f8 0%, #f0e6ff 50%, #e6f8ff 100%);
+    }
+
+    .welcome-card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(12px);
+      border-radius: 32px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 8px 40px rgba(255,110,180,0.18), 0 2px 12px rgba(199,125,255,0.12);
+      border: 2.5px solid rgba(255,179,217,0.5);
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      animation: popIn 0.7s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.7) translateY(40px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .welcome-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.02em;
+    }
+    .welcome-subtitle {
+      font-size: 1.1rem;
+      color: var(--purple);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .profile-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 1.5rem;
+    }
+    .profile-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: conic-gradient(var(--pink), var(--purple), var(--mint), var(--yellow), var(--pink));
+      animation: spin 4s linear infinite;
+      z-index: 0;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .profile-inner {
+      position: absolute;
+      inset: 4px;
+      border-radius: 50%;
+      background: white;
+      z-index: 1;
+    }
+    .profile-img {
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      object-fit: cover;
+      width: calc(100% - 16px);
+      height: calc(100% - 16px);
+      z-index: 2;
+    }
+
+    .deco-emoji {
+      position: absolute;
+      font-size: 1.6rem;
+      animation: bounce 1.5s ease-in-out infinite alternate;
+    }
+    .deco-emoji:nth-child(1) { top: -10px; right: -10px; animation-delay: 0s; }
+    .deco-emoji:nth-child(2) { bottom: -10px; left: -10px; animation-delay: 0.5s; }
+    .deco-emoji:nth-child(3) { top: 50%; left: -18px; animation-delay: 0.3s; }
+    @keyframes bounce { from { transform: translateY(0) scale(1); } to { transform: translateY(-8px) scale(1.15); } }
+
+    .enter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      color: white;
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      padding: 0.8rem 2.2rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(255,110,180,0.4);
+      transition: transform 0.15s, box-shadow 0.15s;
+      margin-top: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+    .enter-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 28px rgba(255,110,180,0.5);
+    }
+    .enter-btn:active { transform: scale(0.97); }
+
+    /* ========== LOADING PAGE ========== */
+    #loading-page {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: #000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #loading-page.active { display: flex; }
+
+    .loading-video-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    #loading-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ========== MAIN PAGE ========== */
+    #main-page {
+      flex-direction: column;
+      background: linear-gradient(135deg, #fff0f8 0%, #f0e6ff 50%, #e6f8ff 100%);
+    }
+
+    .main-header {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+      padding: 1.2rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 20px rgba(255,110,180,0.3);
+    }
+    .main-header-icon { font-size: 2rem; }
+    .main-header h1 {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.03em;
+    }
+    .main-header p {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.85rem;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 1.5rem;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* Topic pills */
+    .topics-label {
+      font-size: 0.9rem;
+      color: var(--purple);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .topics-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+    .topic-pill {
+      background: linear-gradient(135deg, var(--pink-light), rgba(199,125,255,0.3));
+      border: 2px solid var(--pink-light);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      color: #8b2a6e;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .topic-pill.active, .topic-pill:hover {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,110,180,0.4);
+    }
+
+    /* Study card */
+    .study-card {
+      background: rgba(255,255,255,0.9);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 24px rgba(255,110,180,0.12);
+      border: 2px solid rgba(255,179,217,0.4);
+      margin-bottom: 1.5rem;
+      animation: slideUp 0.5s ease both;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .card-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Image section */
+    .content-img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 16px;
+      margin: 0 auto 1rem;
+      display: block;
+      box-shadow: 0 4px 20px rgba(199,125,255,0.2);
+      border: 3px solid var(--pink-light);
+      object-fit: contain;
+    }
+
+    /* Audio player */
+    .audio-section {
+      background: linear-gradient(135deg, #fff0f8, #f0e6ff);
+      border-radius: 24px;
+      padding: 1.5rem;
+      border: 2px solid var(--pink-light);
+      margin-top: 1rem;
+    }
+    .audio-label {
+      font-size: 1rem;
+      color: var(--purple);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .audio-title {
+      font-weight: 700;
+      color: #6b2f8a;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+    .audio-subtitle {
+      font-size: 0.85rem;
+      color: #b06090;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    /* Time display */
+    .audio-time {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #b06090;
+      margin-bottom: 0.4rem;
+      font-family: 'Kanit', sans-serif;
+    }
+
+    /* Progress scrubber */
+    .progress-wrap {
+      width: 100%;
+      background: rgba(255,179,217,0.3);
+      border-radius: 999px;
+      height: 14px;
+      margin-bottom: 1.2rem;
+      cursor: pointer;
+      position: relative;
+      touch-action: none;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      border-radius: 999px;
+      width: 0%;
+      pointer-events: none;
+      position: relative;
+    }
+    .progress-thumb {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: 3px solid var(--pink);
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(255,110,180,0.4);
+    }
+
+    /* Controls row */
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .ctrl-btn {
+      background: rgba(255,179,217,0.2);
+      border: 2px solid var(--pink-light);
+      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+      color: var(--pink);
+    }
+    .ctrl-btn:hover { background: var(--pink-light); transform: scale(1.08); }
+    .ctrl-btn:active { transform: scale(0.93); }
+
+    .play-btn-big {
+      background: linear-gradient(135deg, var(--pink), var(--purple));
+      border: none;
+      border-radius: 50%;
+      width: 76px;
+      height: 76px;
+      font-size: 2rem;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(255,110,180,0.5);
+      transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+    }
+    .play-btn-big:hover { transform: scale(1.08); box-shadow: 0 8px 30px rgba(255,110,180,0.6); }
+    .play-btn-big:active { transform: scale(0.93); }
+
+    /* Topics content area */
+    .topic-content {
+      display: none;
+    }
+    .topic-content.active {
+      display: block;
+      animation: slideUp 0.4s ease both;
+    }
+
+    .info-box {
+      background: linear-gradient(135deg, #fff5fb, #f5edff);
+      border-left: 4px solid var(--pink);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+    .info-box h3 {
+      font-size: 1rem;
+      color: var(--pink);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .info-box p { color: #555; font-size: 0.9rem; line-height: 1.6; }
+
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.6rem;
+      margin-top: 0.8rem;
+    }
+    .example-item {
+      background: white;
+      border: 2px solid var(--pink-light);
+      border-radius: 12px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.88rem;
+      color: #5a2070;
+    }
+    .example-item strong { color: var(--pink); }
+
+    /* Responsive */
+    @media (max-width: 500px) {
+      .welcome-card { padding: 2rem 1.2rem; }
+      .main-header h1 { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating stars background -->
+<div class="stars-bg" id="starsBg"></div>
+
+<!-- ========== WELCOME PAGE ========== -->
+<div id="welcome-page" class="page active">
+  <div class="welcome-card">
+    <div class="welcome-title">🌸 ยินดีต้อนรับ</div>
+    <div class="welcome-subtitle">💜 Chompoo 💜</div>
+
+    <div class="profile-wrap">
+      <div class="profile-ring"></div>
+      <div class="profile-inner"></div>
+      <img src="chompoo.jpg" alt="Chompoo" class="profile-img" />
+      <span class="deco-emoji">⭐</span>
+      <span class="deco-emoji">🌸</span>
+      <span class="deco-emoji">💫</span>
+    </div>
+
+    <button class="enter-btn" onclick="startLoading()">
+      🚀 เข้าสู่เว็บไซต์
+    </button>
+  </div>
+</div>
+
+<!-- ========== LOADING PAGE ========== -->
+<div id="loading-page">
+  <div class="loading-video-wrap">
+    <video id="loading-video" playsinline>
+      <source src="loading.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+<!-- ========== MAIN PAGE ========== -->
+<div id="main-page" class="page">
+  <div class="main-header">
+    <div class="main-header-icon">📚</div>
+    <div>
+      <h1>แนวข้อสอบภาษาอังกฤษ ✨</h1>
+      <p>Pointers in English — เตรียมสอบอย่างมั่นใจ! 🌸</p>
+    </div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- Topics -->
+    <div class="topics-label">📌 เลือกหัวข้อที่ต้องการเรียน:</div>
+    <div class="topics-list">
+      <div class="topic-pill active" onclick="showTopic('overview')">🌟 ภาพรวม</div>
+      <div class="topic-pill" onclick="showTopic('prefix')">🔤 Negative Prefixes</div>
+      <div class="topic-pill" onclick="showTopic('modal')">📝 Must / Mustn't / Needn't</div>
+      <div class="topic-pill" onclick="showTopic('comparative')">📊 Comparative</div>
+      <div class="topic-pill" onclick="showTopic('superlative')">🏆 Superlative</div>
+      <div class="topic-pill" onclick="showTopic('reading')">📖 Reading</div>
+      <div class="topic-pill" onclick="showTopic('writing')">✏️ Writing</div>
+    </div>
+
+    <!-- ===== OVERVIEW ===== -->
+    <div id="topic-overview" class="topic-content active">
+      <div class="study-card">
+        <div class="card-title">🖼️ ภาพแนวข้อสอบ</div>
+        <img src="eng.jpg" alt="English Pointers" class="content-img" />
+        <div class="audio-section">
+          <div class="audio-label">🎧 ฟังเสียงประกอบ</div>
+          <div class="audio-title">🎵 Pointers in English</div>
+          <div class="audio-subtitle">แนวข้อสอบภาษาอังกฤษ</div>
+          <div class="audio-time">
+            <span id="currentTime">0:00</span>
+            <span id="totalTime">0:00</span>
+          </div>
+          <div class="progress-wrap" id="progressWrap">
+            <div class="progress-bar" id="progressBar">
+              <div class="progress-thumb"></div>
+            </div>
+          </div>
+          <div class="audio-controls">
+            <button class="ctrl-btn" onclick="skipAudio(-10)" title="ย้อนกลับ 10 วิ">⏪</button>
+            <button class="play-btn-big" id="playBtnMain" onclick="toggleAudio()">▶️</button>
+            <button class="ctrl-btn" onclick="skipAudio(10)" title="ข้ามไป 10 วิ">⏩</button>
+          </div>
+          <audio id="mainAudio" src="eng.mp3" preload="metadata"></audio>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== NEGATIVE PREFIXES ===== -->
+    <div id="topic-prefix" class="topic-content">
+      <div class="study-card">
+        <div class="card-title">🔤 Negative Prefixes</div>
+        <div class="info-box">
+          <h3>คืออะไร?</h3>
+          <p>Negative Prefixes คือคำเติมหน้าที่ทำให้คำมีความหมายตรงข้ามหรือเชิงลบ</p>
+        </div>
+        <div class="example-grid">
+          <div class="example-item"><strong>un-</strong>: unhappy, unkind, unknown</div>
+          <div class="example-item"><strong>dis-</strong>: disagree, dishonest, dislike</div>
+          <div class="example-item"><strong>im-</strong>: impossible, impolite, immature</div>
+          <div class="example-item"><strong>in-</strong>: invisible, incorrect, incomplete</div>
+          <div class="example-item"><strong>ir-</strong>: irresponsible, irregular, irrelevant</div>
+          <div class="example-item"><strong>il-</strong>: illegal, illogical, illiterate</div>
+          <div class="example-item"><strong>mis-</strong>: misunderstand, misuse, mistake</div>
+          <div class="example-item"><strong>non-</strong>: nonfiction, nonprofit, nonsense</div>
+        </div>
+        <div class="info-box" style="margin-top:1rem">
+          <h3>💡 เคล็ดลับ</h3>
+          <p>im- ใช้กับคำที่ขึ้นต้นด้วย p, b, m เช่น impossible, imbalanced<br>
+             il- ใช้กับคำขึ้นต้น l เช่น illegal<br>
+             ir- ใช้กับคำขึ้นต้น r เช่น irresponsible</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL ===== -->
+    <div id="topic-modal" class="topic-content">
+      <div class="study-card">
+        <div class="card-title">📝 Must / Mustn't / Needn't</div>
+        <div class="info-box">
+          <h3>Must (ต้อง / แน่ใจว่า)</h3>
+          <p>ใช้แสดงความจำเป็นหรือความแน่ใจอย่างแรง<br>
+          ✅ You <strong>must</strong> wear a seatbelt. (กฎ/บังคับ)<br>
+          ✅ She <strong>must</strong> be tired. (คาดเดาอย่างมั่นใจ)</p>
+        </div>
+        <div class="info-box">
+          <h3>Mustn't (ห้าม)</h3>
+          <p>ใช้แสดงการห้ามอย่างเด็ดขาด<br>
+          ❌ You <strong>mustn't</strong> smoke here. (ห้ามเด็ดขาด)</p>
+        </div>
+        <div class="info-box">
+          <h3>Needn't (ไม่จำเป็นต้อง)</h3>
+          <p>ใช้แสดงว่าไม่จำเป็นต้องทำ (ต่างจาก mustn't)<br>
+          ℹ️ You <strong>needn't</strong> bring food. (ไม่จำเป็น แต่ไม่ได้ห้าม)</p>
+        </div>
+        <div class="example-grid" style="margin-top:0.5rem">
+          <div class="example-item">You <strong>must</strong> study hard.</div>
+          <div class="example-item">You <strong>mustn't</strong> cheat.</div>
+          <div class="example-item">You <strong>needn't</strong> hurry.</div>
+          <div class="example-item">She <strong>must</strong> be home.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== COMPARATIVE ===== -->
+    <div id="topic-comparative" class="topic-content">
+      <div class="study-card">
+        <div class="card-title">📊 Comparative (far / much)</div>
+        <div class="info-box">
+          <h3>Comparative คืออะไร?</h3>
+          <p>การเปรียบเทียบระหว่างสองสิ่ง โดยใช้ far / much เพื่อเน้นความแตกต่าง</p>
+        </div>
+        <div class="info-box">
+          <h3>Far + Comparative</h3>
+          <p>ใช้ far เพื่อเน้นว่าต่างกันมาก<br>
+          ✨ This is <strong>far better</strong> than before.<br>
+          ✨ She is <strong>far more</strong> intelligent than him.</p>
+        </div>
+        <div class="info-box">
+          <h3>Much + Comparative</h3>
+          <p>ใช้ much เพื่อเน้นว่ามากกว่ามาก<br>
+          ✨ He runs <strong>much faster</strong> than I do.<br>
+          ✨ This bag is <strong>much cheaper</strong> than that one.</p>
+        </div>
+        <div class="example-grid">
+          <div class="example-item"><strong>far</strong> bigger</div>
+          <div class="example-item"><strong>much</strong> taller</div>
+          <div class="example-item"><strong>far</strong> more beautiful</div>
+          <div class="example-item"><strong>much</strong> easier</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== SUPERLATIVE ===== -->
+    <div id="topic-superlative" class="topic-content">
+      <div class="study-card">
+        <div class="card-title">🏆 Superlative (too / enough)</div>
+        <div class="info-box">
+          <h3>Too (มากเกินไป)</h3>
+          <p>ใช้ too + adjective/adverb = มากเกินไปจนมีผลเสีย<br>
+          ❗ It's <strong>too hot</strong> to go outside.<br>
+          ❗ She speaks <strong>too fast</strong> for me to understand.</p>
+        </div>
+        <div class="info-box">
+          <h3>Enough (เพียงพอ)</h3>
+          <p>adj/adv + enough = เพียงพอที่จะ...<br>
+          ✅ She is <strong>tall enough</strong> to reach the shelf.<br>
+          ✅ He didn't study <strong>hard enough</strong> to pass.</p>
+        </div>
+        <div class="info-box">
+          <h3>⚠️ โครงสร้าง</h3>
+          <p><strong>too</strong> + adj + (for sb) + to-infinitive<br>
+          adj + <strong>enough</strong> + (for sb) + to-infinitive</p>
+        </div>
+        <div class="example-grid">
+          <div class="example-item">too tired <strong>to work</strong></div>
+          <div class="example-item">old enough <strong>to vote</strong></div>
+          <div class="example-item">too cold <strong>to swim</strong></div>
+          <div class="example-item">smart enough <strong>to solve</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== READING ===== -->
+    <div id="topic-reading" class="topic-content">
+      <div class="study-card">
+        <div class="card-title">📖 Reading Skills</div>
+        <div class="info-box">
+          <h3>กลยุทธ์การอ่าน</h3>
+          <p>1. <strong>Skimming</strong> — อ่านผ่านๆ เพื่อจับใจความหลัก<br>
+          2. <strong>Scanning</strong> — ค้นหาข้อมูลเฉพาะในเนื้อเรื่อง<br>
+          3. <strong>Intensive reading</strong> — อ่านละเอียดทุกส่วน</p>
+        </div>
+        <div class="info-box">
+          <h3>คำถามที่มักออกสอบ</h3>
+          <p>• Main idea / Topic sentence คืออะไร?<br>
+          • ผู้เขียนมีทัศนคติอย่างไร? (Author's attitude)<br>
+          • คำในบริบทหมายความว่าอะไร? (Vocabulary in context)<br>
+          • ข้อใดสรุปได้จากเรื่อง? (Inference)</p>
+        </div>
+        <div class="info-box">
+          <h3>💡 เคล็ดลับ</h3>
+          <p>อ่านคำถามก่อน แล้วค่อยอ่านเนื้อเรื่อง จะประหยัดเวลาและหาคำตอบได้เร็วขึ้น!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== WRITING ===== -->
+    <div id="topic-writing" class="topic-content">
+      <div class="study-card">
+        <div class="card-title">✏️ Writing Skills</div>
+        <div class="info-box">
+          <h3>โครงสร้างการเขียน Paragraph</h3>
+          <p>1. <strong>Topic sentence</strong> — ประโยคหลักที่บอกใจความสำคัญ<br>
+          2. <strong>Supporting sentences</strong> — ประโยคสนับสนุน ให้ตัวอย่างหรือรายละเอียด<br>
+          3. <strong>Concluding sentence</strong> — ประโยคสรุปหรือย้ำใจความ</p>
+        </div>
+        <div class="info-box">
+          <h3>Connectors ที่ควรรู้</h3>
+          <p><strong>เพิ่มเติม:</strong> furthermore, moreover, in addition<br>
+          <strong>ตรงข้าม:</strong> however, on the other hand, nevertheless<br>
+          <strong>เหตุผล:</strong> because, since, as a result, therefore<br>
+          <strong>สรุป:</strong> in conclusion, to sum up, finally</p>
+        </div>
+        <div class="info-box">
+          <h3>💡 เคล็ดลับ</h3>
+          <p>หลีกเลี่ยงการใช้ประโยคสั้นๆ ซ้ำๆ ลองใช้ connectors เชื่อมประโยค และอ่านทวนก่อนส่งเสมอ!</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end main-content -->
+
+</div><!-- end main-page -->
+
+<script>
+  // ===== STARS =====
+  const starEmojis = ['⭐','🌟','✨','💫','🌸','💜','🩷','🩵','💛'];
+  const starsBg = document.getElementById('starsBg');
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.className = 'star';
+    s.textContent = starEmojis[Math.floor(Math.random() * starEmojis.length)];
+    s.style.left = Math.random() * 100 + 'vw';
+    s.style.animationDuration = (8 + Math.random() * 12) + 's';
+    s.style.animationDelay = (Math.random() * 10) + 's';
+    s.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+    starsBg.appendChild(s);
+  }
+
+  // ===== LOADING =====
+  let playCount = 0;
+  const MAX_PLAYS = Math.floor(Math.random() * 4) + 1;
+
+  function startLoading() {
+    const loadingPage = document.getElementById('loading-page');
+    loadingPage.classList.add('active');
+    document.getElementById('welcome-page').classList.remove('active');
+
+    playCount = 0;
+    const video = document.getElementById('loading-video');
+    video.muted = false;
+    video.currentTime = 0;
+
+    const tryPlay = () => {
+      video.play().catch(() => {
+        video.muted = true;
+        video.play();
+      });
+    };
+    tryPlay();
+
+    video.onended = function() {
+      playCount++;
+      if (playCount < MAX_PLAYS) {
+        video.currentTime = 0;
+        video.play();
+      } else {
+        loadingPage.classList.remove('active');
+        showPage('main-page');
+      }
+    };
+  }
+
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  // ===== TOPIC PILLS =====
+  function showTopic(name) {
+    document.querySelectorAll('.topic-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.topic-pill').forEach(p => p.classList.remove('active'));
+    document.getElementById('topic-' + name).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ===== AUDIO =====
+  const audio = document.getElementById('mainAudio');
+  const playBtnMain = document.getElementById('playBtnMain');
+  const progressBar = document.getElementById('progressBar');
+  const progressWrap = document.getElementById('progressWrap');
+  const currentTimeEl = document.getElementById('currentTime');
+  const totalTimeEl = document.getElementById('totalTime');
+
+  function formatTime(sec) {
+    if (isNaN(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m + ':' + String(s).padStart(2, '0');
+  }
+
+  function toggleAudio() {
+    if (audio.paused) {
+      audio.play();
+      playBtnMain.textContent = '⏸️';
+    } else {
+      audio.pause();
+      playBtnMain.textContent = '▶️';
+    }
+  }
+
+  function skipAudio(sec) {
+    audio.currentTime = Math.max(0, Math.min(audio.duration || 0, audio.currentTime + sec));
+  }
+
+  audio.addEventListener('loadedmetadata', () => {
+    totalTimeEl.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      const pct = (audio.currentTime / audio.duration) * 100;
+      progressBar.style.width = pct + '%';
+      currentTimeEl.textContent = formatTime(audio.currentTime);
+    }
+  });
+
+  audio.addEventListener('ended', () => {
+    playBtnMain.textContent = '▶️';
+    progressBar.style.width = '0%';
+    currentTimeEl.textContent = '0:00';
+  });
+
+  // Scrubbing (mouse + touch)
+  let scrubbing = false;
+
+  function getScrubRatio(e, wrap) {
+    const rect = wrap.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    return Math.max(0, Math.min(1, x / rect.width));
+  }
+
+  progressWrap.addEventListener('mousedown', e => {
+    scrubbing = true;
+    const ratio = getScrubRatio(e, progressWrap);
+    audio.currentTime = ratio * (audio.duration || 0);
+  });
+  progressWrap.addEventListener('touchstart', e => {
+    scrubbing = true;
+    const ratio = getScrubRatio(e, progressWrap);
+    audio.currentTime = ratio * (audio.duration || 0);
+  }, { passive: true });
+
+  document.addEventListener('mousemove', e => {
+    if (!scrubbing) return;
+    const ratio = getScrubRatio(e, progressWrap);
+    audio.currentTime = ratio * (audio.duration || 0);
+  });
+  document.addEventListener('touchmove', e => {
+    if (!scrubbing) return;
+    const ratio = getScrubRatio(e, progressWrap);
+    audio.currentTime = ratio * (audio.duration || 0);
+  }, { passive: true });
+
+  document.addEventListener('mouseup', () => { scrubbing = false; });
+  document.addEventListener('touchend', () => { scrubbing = false; });
+</script>
+</body>
+</html>
